@@ -4,14 +4,16 @@ using Library_MS.Model_DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Library_MS.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20220325123652_member_librarian_module")]
+    partial class member_librarian_module
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,108 +40,6 @@ namespace Library_MS.Migrations
                     b.HasKey("AddressID");
 
                     b.ToTable("Addresses");
-                });
-
-            modelBuilder.Entity("Library_MS.Models.Author", b =>
-                {
-                    b.Property<int>("AuthorID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AuthorID");
-
-                    b.ToTable("Authors");
-                });
-
-            modelBuilder.Entity("Library_MS.Models.Book", b =>
-                {
-                    b.Property<int>("BookID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("BookCategoryCategoryID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("BookTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Format")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ISBN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Language")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PublishDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PurchaseDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("numberOfPage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("price")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BookID");
-
-                    b.HasIndex("BookCategoryCategoryID");
-
-                    b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("Library_MS.Models.BookAuthor", b =>
-                {
-                    b.Property<int>("BookAuthorID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("AuthorID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("BookId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BookAuthorID");
-
-                    b.HasIndex("AuthorID");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("BookAuthors");
-                });
-
-            modelBuilder.Entity("Library_MS.Models.BookCategory", b =>
-                {
-                    b.Property<int>("CategoryID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoryID");
-
-                    b.ToTable("bookCategories");
                 });
 
             modelBuilder.Entity("Library_MS.Models.Librarian", b =>
@@ -205,10 +105,6 @@ namespace Library_MS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MemberCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("MembershipDate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -251,30 +147,6 @@ namespace Library_MS.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Library_MS.Models.Book", b =>
-                {
-                    b.HasOne("Library_MS.Models.BookCategory", "BookCategory")
-                        .WithMany("Books")
-                        .HasForeignKey("BookCategoryCategoryID");
-
-                    b.Navigation("BookCategory");
-                });
-
-            modelBuilder.Entity("Library_MS.Models.BookAuthor", b =>
-                {
-                    b.HasOne("Library_MS.Models.Author", "Author")
-                        .WithMany("BookAuthors")
-                        .HasForeignKey("AuthorID");
-
-                    b.HasOne("Library_MS.Models.Book", "Book")
-                        .WithMany("BookAuthors")
-                        .HasForeignKey("BookId");
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Book");
-                });
-
             modelBuilder.Entity("Library_MS.Models.Librarian", b =>
                 {
                     b.HasOne("Library_MS.Models.Address", "Address")
@@ -309,21 +181,6 @@ namespace Library_MS.Migrations
                     b.Navigation("Librarians");
 
                     b.Navigation("Members");
-                });
-
-            modelBuilder.Entity("Library_MS.Models.Author", b =>
-                {
-                    b.Navigation("BookAuthors");
-                });
-
-            modelBuilder.Entity("Library_MS.Models.Book", b =>
-                {
-                    b.Navigation("BookAuthors");
-                });
-
-            modelBuilder.Entity("Library_MS.Models.BookCategory", b =>
-                {
-                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("Library_MS.Models.Librarian", b =>

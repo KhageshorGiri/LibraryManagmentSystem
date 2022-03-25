@@ -13,6 +13,8 @@ namespace Library_MS.Models
         [Key]
         public int MemberID { get; set; }
         [Required]
+        public string MemberCode { get; set; }
+        [Required]
         public string FullName { get; set; }
         [Required]
         public string Gender { get; set; }
