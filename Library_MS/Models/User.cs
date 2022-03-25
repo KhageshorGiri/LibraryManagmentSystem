@@ -10,5 +10,9 @@ namespace Library_MS.Models
     {
         [Key]
         public int UserID { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public int LibrarianID { get; set; }
+        public virtual Librarian Librarian { get; set; }
     }
 }

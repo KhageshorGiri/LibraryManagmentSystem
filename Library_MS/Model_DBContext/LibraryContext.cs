@@ -15,5 +15,8 @@ namespace Library_MS.Model_DBContext
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Member> Members { get; set; }
+        public DbSet<Librarian> Librarians { get; set; }
     }
 }
