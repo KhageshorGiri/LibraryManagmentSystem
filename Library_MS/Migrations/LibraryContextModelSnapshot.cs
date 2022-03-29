@@ -15,16 +15,16 @@ namespace Library_MS.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "5.0.15")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Library_MS.Models.Address", b =>
                 {
                     b.Property<int>("AddressID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AdditionalInfo")
                         .HasColumnType("nvarchar(max)");
@@ -35,7 +35,12 @@ namespace Library_MS.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MemberID")
+                        .HasColumnType("int");
+
                     b.HasKey("AddressID");
+
+                    b.HasIndex("MemberID");
 
                     b.ToTable("Addresses");
                 });
@@ -45,7 +50,7 @@ namespace Library_MS.Migrations
                     b.Property<int>("AuthorID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -60,7 +65,7 @@ namespace Library_MS.Migrations
                     b.Property<int>("BookID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("BookCategoryCategoryID")
                         .HasColumnType("int");
@@ -110,7 +115,7 @@ namespace Library_MS.Migrations
                     b.Property<int>("BookAuthorID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AuthorID")
                         .HasColumnType("int");
@@ -132,10 +137,10 @@ namespace Library_MS.Migrations
                     b.Property<int>("CategoryID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CategoryID");
 
@@ -147,10 +152,7 @@ namespace Library_MS.Migrations
                     b.Property<int>("LibrarianId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("AddressID")
-                        .HasColumnType("int");
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -174,8 +176,6 @@ namespace Library_MS.Migrations
 
                     b.HasKey("LibrarianId");
 
-                    b.HasIndex("AddressID");
-
                     b.ToTable("Librarians");
                 });
 
@@ -184,10 +184,7 @@ namespace Library_MS.Migrations
                     b.Property<int>("MemberID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("AddressID")
-                        .HasColumnType("int");
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -223,8 +220,6 @@ namespace Library_MS.Migrations
 
                     b.HasKey("MemberID");
 
-                    b.HasIndex("AddressID");
-
                     b.ToTable("Members");
                 });
 
@@ -233,7 +228,7 @@ namespace Library_MS.Migrations
                     b.Property<int>("UserID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("LibrarianID")
                         .HasColumnType("int");
@@ -249,6 +244,15 @@ namespace Library_MS.Migrations
                     b.HasIndex("LibrarianID");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Library_MS.Models.Address", b =>
+                {
+                    b.HasOne("Library_MS.Models.Member", "Member")
+                        .WithMany("Addresses")
+                        .HasForeignKey("MemberID");
+
+                    b.Navigation("Member");
                 });
 
             modelBuilder.Entity("Library_MS.Models.Book", b =>
@@ -275,24 +279,6 @@ namespace Library_MS.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("Library_MS.Models.Librarian", b =>
-                {
-                    b.HasOne("Library_MS.Models.Address", "Address")
-                        .WithMany("Librarians")
-                        .HasForeignKey("AddressID");
-
-                    b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("Library_MS.Models.Member", b =>
-                {
-                    b.HasOne("Library_MS.Models.Address", "Address")
-                        .WithMany("Members")
-                        .HasForeignKey("AddressID");
-
-                    b.Navigation("Address");
-                });
-
             modelBuilder.Entity("Library_MS.Models.User", b =>
                 {
                     b.HasOne("Library_MS.Models.Librarian", "Librarian")
@@ -302,13 +288,6 @@ namespace Library_MS.Migrations
                         .IsRequired();
 
                     b.Navigation("Librarian");
-                });
-
-            modelBuilder.Entity("Library_MS.Models.Address", b =>
-                {
-                    b.Navigation("Librarians");
-
-                    b.Navigation("Members");
                 });
 
             modelBuilder.Entity("Library_MS.Models.Author", b =>
@@ -329,6 +308,11 @@ namespace Library_MS.Migrations
             modelBuilder.Entity("Library_MS.Models.Librarian", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Library_MS.Models.Member", b =>
+                {
+                    b.Navigation("Addresses");
                 });
 #pragma warning restore 612, 618
         }

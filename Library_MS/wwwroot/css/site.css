@@ -148,7 +148,9 @@ a.article:hover {
 
 #content {
     width: 100%;
-    padding: 20px;
+    padding: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
     min-height: 100vh;
     transition: all 0.3s;
 }

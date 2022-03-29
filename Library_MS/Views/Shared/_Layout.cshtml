@@ -6,7 +6,19 @@
     <title>@ViewData["Title"] - Library_MS</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+
+    <style>
+
+        @*overwritting form control class*@ 
+        .form-control:focus {
+            border-color: #BF40BF;
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 2px rgba(255, 100, 255, 0.5);
+            -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 3px rgba(255, 100, 255, 0.5);
+        }
+    </style>
 </head>
+
 <body>
 
 
@@ -20,7 +32,7 @@
             <ul class="list-unstyled components">
 
                 <li>
-                    <a href="#">Home</a>
+                    <a asp-controller="Home" asp-action="Index">Home</a>
                 </li>
 
                 @* <li class="active">
@@ -38,7 +50,11 @@
             </ul>
         </li>*@
                 <li>
-                    <a href="#">About</a>
+                    <a asp-controller="Member" asp-action="Index">Members</a>
+                </li>
+
+                <li>
+                    <a asp-controller="BookCategories" asp-action="Index">Book Category</a>
                 </li>
 
             </ul>
@@ -49,7 +65,7 @@
         <!-- Page Content  -->
         <div id="content">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light py-3 mb-0" style="background-color: lightgray; margin-top: 0px; ">
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
@@ -71,7 +87,7 @@
                 </div>
             </nav>
 
-            <div class="container container-fluid container-xl body-content mt-2 p-0 col-12">
+            <div class="container container-fluid container-xl body-content mt-2 col-12">
                 @RenderBody()
                 <hr />
 

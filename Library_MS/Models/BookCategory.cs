@@ -15,7 +15,7 @@ namespace Library_MS.Models
 
         [Key]
         public int CategoryID { get; set; }
-        public int Category { get; set; }
+        public string Category { get; set; }
 
         //Relation: refrence
         public virtual ICollection<Book> Books { get; set; }

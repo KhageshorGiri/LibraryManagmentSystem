@@ -1,0 +1,69 @@
+﻿
+@model IEnumerable<Library_MS.Models.Member>
+
+
+@{
+}
+
+<div class="card shadow">
+    <div class="card-header text-right mb-2">
+        <a class="btn btn-primary" asp-controller="Member" asp-action="Create">Add New Member</a>
+    </div>
+
+    <div class="table-responsive card-body">
+        <table class="table table-striped" id="MemberDetailsTable">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Member Name</th>
+                    <th>Member Code</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var member in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@member.ImagePath" style="width:100px; height:100px;" />
+                        </td>
+                        <td>@member.FullName</td>
+                        <td>@member.MemberCode</td>
+                        <td>@member.Status</td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-info" asp-controller="Member" asp-action="Details" asp-route-id="@member.MemberID">Details</a>
+                            <a class="btn btn-sm btn-outline-secondary" asp-controller="Member" asp-action="Edit" asp-route-id="@member.MemberID">Edit</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-controller="Member" asp-action="Delete" asp-route-id="@member.MemberID">Delete</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+@section Scripts{
+    <link href="~/lib/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <script src="~/lib/datatables/jquery.dataTables.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+
+            $("#MemberDetailsTable").DataTable();
+
+
+
+
+
+        });
+
+    </script>
+
+}

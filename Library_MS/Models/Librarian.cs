@@ -33,8 +33,7 @@ namespace Library_MS.Models
 
 
         // reltaion: Foreign key refrance
-        public int? AddressID { get; set; }
-        public virtual Address Address { get; set; }
+   
 
         public virtual ICollection<User> Users { get; set; }
     }

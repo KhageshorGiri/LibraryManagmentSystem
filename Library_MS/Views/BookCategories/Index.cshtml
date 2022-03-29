@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Library_MS.Models.BookCategory>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="text-right mb-3">
+    <a class="btn btn-primary text-white" data-toggle="modal" data-target="#categoryModalCenter">Create New</a>
+</div>
+<table class="table table-striped table-responsive-md" id="categoryDetailsTable">
+    <thead>
+        <tr>
+            <th>S.N</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int a = 0;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(++a)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-outline-info" asp-action="Edit" asp-route-id="@item.CategoryID">Edit</a> 
+                    <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.CategoryID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*
+    Boostrap: Model*@
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="categoryModalCenter" tabindex="-1" role="dialog" aria-labelledby="categoryModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="categoryModalLongTitle">Create Book Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               <div>
+                   <form method="post" asp-controller="BookCategories" asp-action="Create">
+                       <div class="row">
+                           <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                           <div class="form-group col-md-12">
+                               <label>Catagory</label>
+                               <input class="form-control" name="Category" />
+                               
+                           </div>
+                       </div>
+                       <div class="modal-footer">
+                           <button type="reset" class="btn btn-secondary" >Clear</button>
+                           <button type="submit" class="btn btn-primary">Save</button>
+                       </div>
+                   </form>
+                 
+               </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

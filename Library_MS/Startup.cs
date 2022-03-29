@@ -1,4 +1,6 @@
 using Library_MS.Model_DBContext;
+using Library_MS.Repository;
+using Library_MS.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +31,9 @@ namespace Library_MS
 
             services.AddDbContext<LibraryContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("LibraryDBConnection")));
+
+            //adding service
+            services.AddScoped<IMember, MemberService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

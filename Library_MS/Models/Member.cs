@@ -10,6 +10,10 @@ namespace Library_MS.Models
 {
     public class Member
     {
+        public Member()
+        {
+            Addresses = new HashSet<Address>();
+        }
         [Key]
         public int MemberID { get; set; }
         [Required]
@@ -32,7 +36,6 @@ namespace Library_MS.Models
         public string Status { get; set; }
 
         // reltaion: Foreign key refrance
-        public int? AddressID { get; set; }
-        public virtual Address Address { get; set; }
+        public virtual ICollection<Address> Addresses { get; set; }
     }
 }

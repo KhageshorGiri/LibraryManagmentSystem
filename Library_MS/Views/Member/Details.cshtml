@@ -1,0 +1,63 @@
+﻿
+@model Library_MS.Models.Member
+
+@{
+}
+
+<div class="card shadow">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="@Model.ImagePath" style="width:100%; height:auto;"/>
+            </div>
+            <div class="col-md-8">
+                <table class="table table-sm table-striped">
+                    <tr>
+                        <th>Name</th>
+                        <td>@Model.FullName</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>@Model.Status</td>
+                    </tr>
+                    <tr>
+                        <th>Member Code</th>
+                        <td>@Model.MemberCode</td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td>@Model.Gender</td>
+
+                    </tr>
+                    <tr>
+                        <th>phone</th>
+                        <td>@Model.Phone</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <th>memberShip Date</th>
+                        <td>@Model.MembershipDate</td>
+                    </tr>
+
+                </table>
+            </div>
+           
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h6>Address Details</h6>
+                @foreach (var address in Model.Addresses)
+                {
+                    <label>@address.Country, @address.City, @address.AdditionalInfo</label>
+                }
+            </div>
+           <div class="col-md-6">
+
+           </div>
+          
+        </div>
+    </div>
+</div>
