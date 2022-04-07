@@ -1,0 +1,166 @@
+﻿
+@model Library_MS.Models.Member
+
+@{
+}
+
+<div class="card shadow p-2">
+    <div class="card-header">
+
+    </div>
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-6">
+                <input value="@Model.MemberID"  readonly hidden/>
+                <table class="table table-sm table-striped">
+                    <tr>
+                        <th>Name</th>
+                        <td>
+                          
+                            @Model.FullName
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Member Code</th>
+                        <td >
+                            <label id="memberIdValue">
+                                @Model.MemberCode
+                            </label>                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>joning Date</th>
+                        <td>@Model.MembershipDate</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>@Model.Status</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-3">
+                <h6>Fine Section</h6>
+            </div>
+            <div class="col-md-3">
+                <img src="@Model.ImagePath" alt="MeberImage" style="width:60%; height:auto;" />
+            </div>
+        </div>
+        <hr class="bg-info" />
+        <div class="table-responsive">
+            <table class="table table-striped" id="issuedBookIndex">
+                <thead>
+                    <tr>
+                        <th hidden>ID</th>
+                        <th>Image</th>
+                        <th>Book Title</th>
+                        <th>ISBN</th>
+                        <th>Category</th>
+                        <th>Issued Date</th>
+                        <th>Due Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var issue in Model.Issues)
+                    {
+                        string imgePath = "\\" + @issue.Book.ImagePath;
+                        <tr>
+                            <td hidden>
+                                @issue.Book.BookID
+                            </td>
+                            <td>
+                                <img src="@imgePath" style="width:100px; height:auto" />
+                            </td>
+                            <td>
+                                @issue.Book.BookTitle
+                            </td>
+                            <td>
+                                @issue.Book.ISBN
+                            </td>
+                            <td>
+                                @issue.Book.BookCategory.Category
+                            </td>
+
+                            <td>
+                                @issue.issueDate
+                            </td>
+                            <td>
+                                @issue.dueDate
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-success bookReturnBtn" data-toggle="modal" data-target="#returnModel">
+                                    Return
+                                </button>
+                                @* <button class="btn btn-sm btn-success">Renew</button>*@
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*model Section*@
+
+
+<!-- Modal -->
+<div class="modal fade" id="returnModel" tabindex="-1" role="dialog" aria-labelledby="returnModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="returnModalLabel">Book Return</h5>
+                <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-controller="Returns" asp-action="Create">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>Member Id</label>
+                            <input class="form-control" name="memberCode" id="memberId" />
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Book Id</label>
+                            <input class="form-control" name="bookId" id="bookId" />
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Return Date</label>
+                            <input type="date" class="form-control" name="returnDate" id="returnDate" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+
+
+            $("#issuedBookIndex tbody tr .bookReturnBtn").click(function () {
+
+                var bookid = $(this).closest('tr').find('td:eq(0)').html();
+                var member = $('#memberIdValue').html().trim();
+                $("#bookId").val(bookid.trim());
+                $("#memberId").val(member);
+            });
+
+
+        });
+
+    </script>
+
+}

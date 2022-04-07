@@ -20,14 +20,23 @@ namespace Library_MS.Services
        
         public void CreateMember(Member member, Address address)
         {
+
+            member.Addresses.Add(new Address()
+            {
+                Country = address.Country,
+                City = address.City,
+                AdditionalInfo = address.AdditionalInfo
+            });
             db.Members.Add(member);
             db.SaveChanges();
-            int? memberId = member.MemberID;
 
-            address.MemberID = memberId;
-            db.Addresses.Add(address);
+            //another simple approach for this is 
+            // db.Members.Add(member); db.saveChanges();
+            //int memberId = member.MemberID;
 
-            db.SaveChanges();
+            //address.MemberID = memberId;
+            // db.Addresses.Add(address); db.saveChanges();
+
         }
 
         public void DeleteMember(Member member)

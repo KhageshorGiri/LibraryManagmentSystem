@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+}
+<form method="post" asp-controller="Books" asp-action="Create" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-8 card p-2">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label>Book Name</label>
+                    <input class="form-control" type="text" name="BookTitle" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>ISBN</label>
+                    <input class="form-control" name="ISBN" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Image</label>
+                    <input class="form-control" type="file" name="ImageFile" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Tolta Page No.</label>
+                    <input class="form-control" type="number" name="numberOfPage" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Format</label>
+                    <input class="form-control" type="text" name="Format" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Price</label>
+                    <input class="form-control" type="text" name="price" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Language</label>
+                    <input class="form-control" type="text" name="Language" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Status</label>
+                    <input class="form-control" list="bookStatusList" type="text" name="Status" />
+                    <datalist id="bookStatusList">
+                        <option>Active</option>
+                        <option>Issued</option>
+                        <option>Lost</option>
+                        <option>Pending</option>
+                    </datalist>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Purchase Date</label>
+                    <input class="form-control" type="date" name="PurchaseDate" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Publish Date</label>
+                    <input class="form-control" type="date" name="PublishDate" />
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4" style="width:97%; height:auto;">
+            <div class="card p-2">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label>Category</label>
+                        @Html.DropDownList("CategoryID", null, "----Select Category----", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>Author</label>
+                        <div class="col-md-12">
+                            <input class="form-control col-md-12" type="text" name="author" id="author" />
+                            <span class="text-danger" id="authorErrorMgs" style="display:none;">Please Fill Author</span>
+                            <button id="addAtuthor" type="button" class="mt-1 btn bt-sm btn-outline-info col-md-2">+</button>
+                            <input id="allAuthorName" name="allAuthor" readonly hidden />
+                        </div>
+
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table table-sm table-striped" id="authorListTable">
+                            <thead>
+                                <tr>
+                                    <th>Author Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <div class="float-right">
+                <div class="row">
+                    <button type="reset" class="btn btn-secondary mr-2">Clear</button>
+                    <button type="submit" class="btn btn-info">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{ 
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#addAtuthor").click(function () {           
+            var authorName = $("#author").val();
+            if (authorName == "" || typeof (authorName) == 'undefined') {
+                $("#authorErrorMgs").show();
+            }
+            else {
+                $("#authorErrorMgs").hide();
+                tabledata = "<tr>";
+                tabledata += "<td>" + authorName + "</td>";
+                tabledata += "</tr>";
+                $("#authorListTable tbody").append(tabledata);
+                $("#author").val('');
+            }
+
+            if ($("#allAuthorName").val() == '') {
+                var allAuthoreName = "#"
+            }
+            else {
+                var allAuthoreName = $("#allAuthorName").val();
+            }
+            
+            allAuthoreName += authorName + "#";
+            $("#allAuthorName").val(allAuthoreName);
+
+        });
+
+    });
+
+
+
+
+</script>
+
+
+}

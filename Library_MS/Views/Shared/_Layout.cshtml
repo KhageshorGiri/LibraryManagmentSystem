@@ -36,30 +36,39 @@
                 </li>
 
                 @* <li class="active">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                    <a href="#">Home 1</a>
-                </li>
-                <li>
-                    <a href="#">Home 2</a>
-                </li>
-                <li>
-                    <a href="#">Home 3</a>
-                </li>
-            </ul>
-        </li>*@
-                <li>
-                    <a asp-controller="Member" asp-action="Index">Members</a>
-                </li>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li>*@
+
 
                 <li>
                     <a asp-controller="BookCategories" asp-action="Index">Book Category</a>
                 </li>
-
+                <li>
+                    <a asp-controller="Books" asp-action="Index">Books</a>
+                </li>
+                <li>
+                    <a asp-controller="Issue" asp-action="Index">Issue</a>
+                </li>
+                <li>
+                    <a asp-controller="Returns" asp-action="Index">Return</a>
+                </li>
+                <li>
+                    <a asp-controller="Member" asp-action="Index">Members</a>
+                </li>
             </ul>
 
-           
+
         </nav>
 
         <!-- Page Content  -->
@@ -81,7 +90,7 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="#">Hello</a>
                             </li>
-                           
+
                         </ul>
                     </div>
                 </div>
@@ -91,14 +100,15 @@
                 @RenderBody()
                 <hr />
 
-                <footer class="border-top footer text-muted">
-                    <div class="container text-center">
-                        &copy; 2022 - Library_MS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </div>
-                </footer>
             </div>
 
+
         </div>
+        <footer class="border-top footer text-muted fixed-bottom">
+            <div class="container text-center">
+                &copy; 2022 - Library_MS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

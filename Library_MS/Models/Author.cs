@@ -17,7 +17,6 @@ namespace Library_MS.Models
         public int AuthorID { get; set; }
         public string Name { get; set; }
         
-
         public virtual ICollection<BookAuthor> BookAuthors { get; set; }
     }
 }

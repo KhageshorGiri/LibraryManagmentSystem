@@ -48,25 +48,32 @@ namespace Library_MS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind("MemberID", "FullName", "Gender", "Phone", "Email", "ImageFile", "MembershipDate")] Member member, [Bind("AddressID", "Country", "City", "AdditionalInfo")] Address address)
         {
-            string clzCode = "17";
-            string facultyCode = "35";
-            
 
-            string rootFolder = Path.Combine(webHostEnv.WebRootPath, "images");
-            string fileName = member.ImageFile.FileName;
-            string uniqueName = Guid.NewGuid().ToString() + '_' + fileName;
-            string imageFile = Path.Combine(rootFolder, uniqueName);
-            member.ImageFile.CopyTo(new FileStream(imageFile, FileMode.Create));
-            member.ImagePath = Path.Combine("/images/", uniqueName);
+                string clzCode = "17";
+                string facultyCode = "35";
 
-            member.MemberCode = clzCode + facultyCode + Convert.ToString(member.MemberID);
-            member.Status = "Active";
+                if (member.ImageFile != null)
+                {
+                    string rootFolder = Path.Combine(webHostEnv.WebRootPath, "images");
+                    string fileName = member.ImageFile.FileName;
+                    string uniqueName = Guid.NewGuid().ToString() + '_' + fileName;
+                    string imageFile = Path.Combine(rootFolder, uniqueName);
+                    member.ImageFile.CopyTo(new FileStream(imageFile, FileMode.Create));
+                    member.ImagePath = Path.Combine("/images/", uniqueName);
+                }
+                else
+                {
+                    member.ImagePath = "No Image";
+                }
+               
 
+                member.MemberCode = clzCode + facultyCode + Convert.ToString(member.MemberID);
+                member.Status = "Active";
 
+                memberService.CreateMember(member, address);
 
-            memberService.CreateMember(member, address);
-
-            return View();
+                return RedirectToAction(nameof(Index));
+          
         }
 
         // GET: MemberController/Edit/5

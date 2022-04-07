@@ -15,7 +15,7 @@ namespace Library_MS.Models
         public string AdditionalInfo { get; set; }
 
         //retaion refrence
-        public int? MemberID { get; set; }
+        public int MemberID { get; set; }
         public virtual Member Member { get; set; }
     }
 }

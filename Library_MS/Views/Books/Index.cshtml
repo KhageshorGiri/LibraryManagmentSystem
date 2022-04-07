@@ -1,0 +1,58 @@
+﻿
+@model IEnumerable<Library_MS.Models.Book>
+
+@{
+}
+
+<div>
+    <div class="text-right">
+        <a class="btn btn-primary" asp-controller="Books" asp-action="Create">Add New Book</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Book Title</th>
+                    <th>Category</th>
+                    <th>Format</th>
+                    <th>Language</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@book.ImagePath" style="width:100px; height:100px;"/>
+                        </td>
+                        <td>
+                            @book.BookTitle
+                        </td>
+                        <td>
+                            @book.BookCategory.Category
+                        </td>
+                        <td>
+                            @book.Format
+                        </td>
+                        <td>@book.Language</td>
+                        <td>
+                            @book.Status
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-secondary" asp-controller="books" asp-action="Details" asp-route-id="@book.BookID">Details</a>
+                            <a class="btn btn-outline-info" asp-controller="books" asp-action="Edit" asp-route-id="@book.BookID">Edit</a>
+                            <a class="btn btn-outline-danger" asp-controller="books" asp-action="Delete" asp-route-id="@book.BookID">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

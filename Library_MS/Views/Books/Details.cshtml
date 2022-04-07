@@ -1,0 +1,84 @@
+﻿
+@model Library_MS.Models.Book
+
+@{
+    var imagePath = "\\" + Model.ImagePath;
+}
+
+<div class="card">
+    <div class="card-header">
+
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                @*  <img src="~/images/85b321d9-121d-466f-b8bb-cc3178adb24f_hare ram - Logo 1[233].jpg" />*@
+                @*<img src="@imagePath" style="width:100%; height:100%;" />*@
+                <img src="@Url.Content(imagePath)" style="width:100%; height:100%;" />
+            </div>
+            <div class="col-md-9">
+                <div class="card-header">
+                    <h5>Book Details</h5>
+                </div>
+                <table class="table table-sm table-striped">
+                    <tr>
+                        <th>Book Name</th>
+                        <td colspan="3">@Model.BookTitle</td>
+                       
+                    </tr>
+                    <tr>
+                        <th>ISBN</th>
+                        <td colspan="3">@Model.ISBN</td>
+                    </tr>
+                    <tr>
+                        <th>Category</th>
+                        <td>@Model.BookCategory.Category</td>
+                        <th>Format</th>
+                        <td>@Model.Format</td>
+                    </tr>
+
+                    <tr>
+                        <th>Total Page</th>
+                        <td>@Model.numberOfPage</td>
+                        <th>Language</th>
+                        <td>@Model.Language</td>
+                    </tr>
+                    <tr>
+                        <th>Purchase Date</th>
+                        <td>@Model.PurchaseDate</td>
+                        <th>Publish Date</th>
+                        <td>@Model.PublishDate</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>@Model.price</td>
+                        <th>Status</th>
+                        <td>@Model.Status</td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="col-md-12">
+                <div class="card-header">
+                    <h5>Author Details</h5>
+                </div>
+                <table class="table tabe-sm table-striped">
+                    <tbody>
+                        <tr>
+                            @foreach (var author in Model.BookAuthors)
+                            {
+
+                                if (Model.BookID == author.BookId)
+                                {
+                                    @author.Author.Name; 
+                                }
+                            }
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
