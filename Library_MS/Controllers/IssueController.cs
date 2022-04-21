@@ -1,6 +1,7 @@
 ﻿using Library_MS.DTOs;
 using Library_MS.Models;
 using Library_MS.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Text.Json.Serialization;
 
 namespace Library_MS.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class IssueController : Controller
     {
         // GET: Issue

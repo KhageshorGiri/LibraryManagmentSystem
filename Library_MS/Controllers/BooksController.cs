@@ -1,18 +1,16 @@
-﻿using Library_MS.Services;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Library_MS.Model_DBContext;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Library_MS.Repository;
 using Library_MS.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Library_MS.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BooksController : Controller
     {
         private readonly IBook bookService;

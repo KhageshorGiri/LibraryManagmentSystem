@@ -8,9 +8,11 @@ using System.IO;
 using Library_MS.Repository;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Library_MS.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MemberController : Controller
     {
         private readonly IWebHostEnvironment webHostEnv;

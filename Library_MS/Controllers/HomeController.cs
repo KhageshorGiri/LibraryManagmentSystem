@@ -12,9 +12,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Library_MS.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -50,12 +52,13 @@ namespace Library_MS.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Register()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
        // [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterLogin register)
@@ -75,14 +78,14 @@ namespace Library_MS.Controllers
             }
             return View();
         }
-
+        [AllowAnonymous]
         [HttpGet("login")]
         public ActionResult Login()
         {
             return View();
         }
 
-         
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Validate(RegisterLogin user)

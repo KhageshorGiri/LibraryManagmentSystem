@@ -3,9 +3,11 @@ using Library_MS.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using Library_MS.Helper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Library_MS.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ReturnsController : Controller
     {
         private readonly IIssue issueService;
