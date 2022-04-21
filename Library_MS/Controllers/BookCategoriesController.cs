@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Library_MS.Model_DBContext;
 using Library_MS.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Library_MS.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BookCategoriesController : Controller
     {
         private readonly LibraryContext _context;
@@ -20,6 +19,7 @@ namespace Library_MS.Controllers
         }
 
         // GET: BookCategories
+        
         public async Task<IActionResult> Index()
         {
             return View(await _context.bookCategories.ToListAsync());
@@ -116,28 +116,8 @@ namespace Library_MS.Controllers
             return View(bookCategory);
         }
 
-        // GET: BookCategories/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var bookCategory = await _context.bookCategories
-                .FirstOrDefaultAsync(m => m.CategoryID == id);
-            if (bookCategory == null)
-            {
-                return NotFound();
-            }
-
-            return View(bookCategory);
-        }
-
-        // POST: BookCategories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        // Get: BookCategories/Delete/5
+        public async Task<IActionResult> Delete(int id)
         {
             var bookCategory = await _context.bookCategories.FindAsync(id);
             _context.bookCategories.Remove(bookCategory);

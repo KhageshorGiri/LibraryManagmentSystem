@@ -14,6 +14,7 @@ namespace Library_MS.Models
         {
             BookAuthors = new HashSet<BookAuthor>();
             Issues = new HashSet<Issue>();
+            Reserves = new HashSet<Reserve>();
         }
 
         [Key]
@@ -38,6 +39,7 @@ namespace Library_MS.Models
 
         public virtual ICollection<BookAuthor> BookAuthors { get; set; }
         public virtual ICollection<Issue> Issues { get; set; }
+        public virtual ICollection<Reserve> Reserves { get; set; }
 
     }
 }

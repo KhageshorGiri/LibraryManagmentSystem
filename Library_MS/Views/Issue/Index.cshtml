@@ -146,8 +146,14 @@
                                 tableData += "<td>" + value[0].Category +"</td>";
                                 tableData += "<td>" + value[0].Language +"</td>";
                                 tableData += "<td>" + value[0].Format +"</td>";
-                                tableData += "<td>" + value[0].Authors+"</td>";
-                                tableData += "<td>" + value[0].Status +"</td>";
+                                tableData += "<td>" + value[0].Authors + "</td>";
+                                if (value[0].Status != "Active") {
+                                    tableData += "<td class='text-danger'>" + value[0].Status + "</td>";
+                                }
+                                else {
+                                    tableData += "<td>" + value[0].Status + "</td>";
+                                }
+                               
                                 tableData += "</tr>";
 
                             });

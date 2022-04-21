@@ -1,9 +1,74 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<style>
+    .hedingSection {
+        padding: 2em;
+        margin: 8px 0;
+    }
 
+    #totalBooks {
+        background-color: #5DADE2;
+    }
+
+    #totalMembers {
+        background-color: #EDBBED;
+    }
+
+    #issuedBooks {
+        background-color: #76D7C4;
+    }
+
+    #netReturnBooks {
+        background-color: #CCCCFF;
+    }
+</style>
+
+
+@{
+    var totalBook = ViewBag.TotalBook as string;
+    var totalmember = ViewBag.TotalMember as string;
+    var issuedBook = ViewBag.IssuedBook as string;
+    var dueBook = ViewBag.DueBook as string;
+}
+
+<section>
+
+    <div class="row">
+
+        <div class="col-md-6 ">
+            <div class="hedingSection" id="totalBooks">
+                <h2>Total Books</h2>
+                <label> @totalBook</label>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="hedingSection" id="totalMembers">
+                <h2>Total Members</h2>
+                <label>@totalmember</label>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="hedingSection" id="issuedBooks">
+                <h2>Issued Books</h2>
+                <label>@issuedBook</label>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="hedingSection" id="netReturnBooks">
+                <h2>Due Books </h2>
+                <label>@dueBook</label>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

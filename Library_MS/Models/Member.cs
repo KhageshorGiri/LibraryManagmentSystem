@@ -14,6 +14,8 @@ namespace Library_MS.Models
         {
             Addresses = new HashSet<Address>();
             Issues = new HashSet<Issue>();
+            FineDetails = new HashSet<FineDetails>();
+            Reserves = new HashSet<Reserve>();
         }
         [Key]
         public int MemberID { get; set; }
@@ -39,5 +41,7 @@ namespace Library_MS.Models
         // reltaion: Foreign key refrance
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<Issue> Issues { get; set; }
+        public virtual ICollection<FineDetails> FineDetails { get; set; }
+        public virtual ICollection<Reserve> Reserves { get; set; }
     }
 }

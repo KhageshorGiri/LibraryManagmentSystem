@@ -52,7 +52,9 @@ namespace Library_MS.Services
 
         public Member GetMembers(int Id)
         {
-            Member member = db.Members.Include(p => p.Addresses).SingleOrDefault(p=>p.MemberID == Id);
+            Member member = db.Members.Include(p => p.Addresses)
+                .Include(x=>x.Issues).ThenInclude(x=>x.Book).ThenInclude(x=>x.BookCategory)
+                .SingleOrDefault(p=>p.MemberID == Id);
             return member;
             
         }

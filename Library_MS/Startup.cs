@@ -1,6 +1,7 @@
 using Library_MS.Model_DBContext;
 using Library_MS.Repository;
 using Library_MS.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,10 +35,20 @@ namespace Library_MS
             services.AddDbContext<LibraryContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("LibraryDBConnection")));
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie( options =>
+                {
+                    options.LoginPath = "/login";
+                    options.AccessDeniedPath = "/denide";
+                }
+
+                );
+
             //adding service
             services.AddScoped<IMember, MemberService>();
             services.AddScoped<IBook, BookService>();
             services.AddScoped<IIssue, IssueService>();
+            services.AddScoped<IAuth, AuthService>();
+            services.AddScoped<IExtra, ExtraService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +69,7 @@ namespace Library_MS
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -1,0 +1,47 @@
+﻿
+@model Library_MS.DTOs.RegisterLogin;
+
+@{
+    ViewBag.Title = "Login - Page";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+@{
+    var erroMgs = TempData["ErrorMgs"] as string;
+}
+
+@if (!String.IsNullOrEmpty(erroMgs))
+{
+    <div style="background-color:lightpink;">
+        <p class="p-3">@erroMgs</p>
+    </div>
+}
+
+<div class="container row" style="margin-top:4em;">
+    <div class="card col-md-6 " style="margin-inline:auto;">
+        <div class="card-header ">
+            <h5>Login - Page</h5>
+        </div>
+        <div class="card-body">
+
+            <form method="post" asp-controller="Home" asp-action="Validate">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label>User Name</label>
+                        <input class="form-control col-md-12" name="UserName" type="text" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>Password</label>
+                        <input class="form-control col-md-12" name="Password" type="password" />
+                    </div>
+                </div>
+                <hr class="bg-primary" />
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-success px-3">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

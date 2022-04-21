@@ -144,6 +144,52 @@ namespace Library_MS.Migrations
                     b.ToTable("bookCategories");
                 });
 
+            modelBuilder.Entity("Library_MS.Models.Fine", b =>
+                {
+                    b.Property<int>("FineID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("FineAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("FineDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IssueID")
+                        .HasColumnType("int");
+
+                    b.HasKey("FineID");
+
+                    b.HasIndex("IssueID");
+
+                    b.ToTable("Fines");
+                });
+
+            modelBuilder.Entity("Library_MS.Models.FineDetails", b =>
+                {
+                    b.Property<int>("FineDetailsID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MemberID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("PaidAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PayedDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("FineDetailsID");
+
+                    b.HasIndex("MemberID");
+
+                    b.ToTable("FineDetails");
+                });
+
             modelBuilder.Entity("Library_MS.Models.Issue", b =>
                 {
                     b.Property<int>("IssueID")
@@ -254,6 +300,34 @@ namespace Library_MS.Migrations
                     b.ToTable("Members");
                 });
 
+            modelBuilder.Entity("Library_MS.Models.Reserve", b =>
+                {
+                    b.Property<int>("ReserveID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MemberId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReserveDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReserveID");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("MemberId");
+
+                    b.ToTable("Reserves");
+                });
+
             modelBuilder.Entity("Library_MS.Models.User", b =>
                 {
                     b.Property<int>("UserID")
@@ -265,6 +339,9 @@ namespace Library_MS.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
@@ -312,6 +389,28 @@ namespace Library_MS.Migrations
                     b.Navigation("Book");
                 });
 
+            modelBuilder.Entity("Library_MS.Models.Fine", b =>
+                {
+                    b.HasOne("Library_MS.Models.Issue", "Issue")
+                        .WithMany("Fines")
+                        .HasForeignKey("IssueID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Issue");
+                });
+
+            modelBuilder.Entity("Library_MS.Models.FineDetails", b =>
+                {
+                    b.HasOne("Library_MS.Models.Member", "Member")
+                        .WithMany("FineDetails")
+                        .HasForeignKey("MemberID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Member");
+                });
+
             modelBuilder.Entity("Library_MS.Models.Issue", b =>
                 {
                     b.HasOne("Library_MS.Models.Book", "Book")
@@ -323,6 +422,25 @@ namespace Library_MS.Migrations
                     b.HasOne("Library_MS.Models.Member", "Member")
                         .WithMany("Issues")
                         .HasForeignKey("MemberID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Member");
+                });
+
+            modelBuilder.Entity("Library_MS.Models.Reserve", b =>
+                {
+                    b.HasOne("Library_MS.Models.Book", "Book")
+                        .WithMany("Reserves")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Library_MS.Models.Member", "Member")
+                        .WithMany("Reserves")
+                        .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -352,11 +470,18 @@ namespace Library_MS.Migrations
                     b.Navigation("BookAuthors");
 
                     b.Navigation("Issues");
+
+                    b.Navigation("Reserves");
                 });
 
             modelBuilder.Entity("Library_MS.Models.BookCategory", b =>
                 {
                     b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("Library_MS.Models.Issue", b =>
+                {
+                    b.Navigation("Fines");
                 });
 
             modelBuilder.Entity("Library_MS.Models.Librarian", b =>
@@ -368,7 +493,11 @@ namespace Library_MS.Migrations
                 {
                     b.Navigation("Addresses");
 
+                    b.Navigation("FineDetails");
+
                     b.Navigation("Issues");
+
+                    b.Navigation("Reserves");
                 });
 #pragma warning restore 612, 618
         }

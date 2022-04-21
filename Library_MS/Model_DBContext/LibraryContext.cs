@@ -23,6 +23,9 @@ namespace Library_MS.Model_DBContext
         public DbSet<Author> Authors { get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
         public DbSet<Issue> Issues { get; set; }
+        public DbSet<Fine> Fines { get; set; }
+        public DbSet<FineDetails> FineDetails { get; set; }
+        public DbSet<Reserve> Reserves { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -56,6 +59,26 @@ namespace Library_MS.Model_DBContext
                 .HasOne(x => x.Member)
                 .WithMany(x => x.Issues)
                 .HasForeignKey(x => x.MemberID);
+
+            modelBuilder.Entity<Fine>()
+                .HasOne(x => x.Issue)
+                .WithMany(x => x.Fines)
+                .HasForeignKey(x => x.IssueID);
+
+                modelBuilder.Entity<FineDetails>()
+                .HasOne(x => x.Member)
+                .WithMany(x => x.FineDetails)
+                .HasForeignKey(x => x.MemberID);
+
+            modelBuilder.Entity<Reserve>()
+                .HasOne(x => x.Member)
+                .WithMany(x => x.Reserves)
+                .HasForeignKey(x => x.MemberId);
+
+            modelBuilder.Entity<Reserve>()
+                .HasOne(x => x.Book)
+                .WithMany(x => x.Reserves)
+                .HasForeignKey(x => x.BookId);
         }
     }
 }

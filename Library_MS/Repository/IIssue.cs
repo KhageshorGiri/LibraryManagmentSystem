@@ -15,5 +15,6 @@ namespace Library_MS.Repository
         public Member getMember(string code);
         public Book getBook(string isbn);
         public void createIssuce(IssueVM issue);
+        public void FinePayment(int member, string date, decimal amount);
     }
 }

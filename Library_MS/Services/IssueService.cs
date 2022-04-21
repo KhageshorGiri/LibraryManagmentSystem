@@ -24,25 +24,33 @@ namespace Library_MS.Services
 
         public Issue getIssueBook(int BookId)
         {
-            return db.Issues.Where(p=>p.BookID == BookId).SingleOrDefault();
+            return db.Issues.Where(p=> p.ReturnStaus == false && p.Book.BookID == BookId).FirstOrDefault();
         }
 
         public void createIssuce(IssueVM issue)
         {
-            var bookID = db.Books.Where(x => x.ISBN == issue.bookISBN).FirstOrDefault().BookID;
+            var bookID = db.Books.Where(x => x.ISBN == issue.bookISBN);
             var memberID = db.Members.Where(x => x.MemberCode == issue.memberCode).FirstOrDefault().MemberID;
             Issue isu = new Issue();
             isu.MemberID = memberID;
-            isu.BookID = bookID;
+            isu.BookID = bookID.FirstOrDefault().BookID;
             isu.issueDate = issue.issueDate;
             isu.dueDate = issue.dueDate;
             isu.ReturnStaus = false;
             db.Issues.Add(isu);
+
+            bookID.FirstOrDefault().Status = "Issued";
+            db.Entry(bookID).State = EntityState.Modified;
+
             db.SaveChanges();          
         }
 
         public void updateIssue(Issue issue) 
         {
+            Book book = db.Books.Find(issue.BookID);
+            book.Status = "Active";
+            db.Entry(book).State = EntityState.Modified;
+
             db.Entry(issue).State = EntityState.Modified;
             db.SaveChanges();
         }
@@ -54,14 +62,22 @@ namespace Library_MS.Services
             return book;
         }
 
-       
-
         public Member getMember(string code)
         {
             var member = db.Members.Where(x=>x.MemberCode.Replace(" ","") == code.Replace(" ", ""))
                 .Include(x=>x.Issues.Where(x=>x.ReturnStaus == false)).ThenInclude(x=>x.Book).ThenInclude(x=>x.BookCategory)
                 .FirstOrDefault();
             return member;
+        }
+
+        public void FinePayment(int member, string date, decimal amount)
+        {
+            FineDetails fd = new FineDetails();
+            fd.MemberID = member;
+            fd.PayedDate = date;
+            fd.PaidAmount = amount;
+            db.FineDetails.Add(fd);
+            db.SaveChanges();
         }
     }
 }

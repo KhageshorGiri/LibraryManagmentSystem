@@ -8,6 +8,11 @@ namespace Library_MS.Models
 {
     public class Issue
     {
+        public Issue()
+        {
+            Fines = new HashSet<Fine>();
+        }
+
         [Key]
         public int IssueID { get; set; }
         public string issueDate { get; set; }
@@ -20,5 +25,7 @@ namespace Library_MS.Models
         public virtual Member Member { get; set; }
         public int BookID { get; set; }
         public virtual Book Book { get; set; }
+
+        public virtual ICollection<Fine> Fines { get; set; }
     }
 }

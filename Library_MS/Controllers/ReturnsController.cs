@@ -1,11 +1,8 @@
 ﻿using Library_MS.Models;
 using Library_MS.Repository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Library_MS.Helper;
 
 namespace Library_MS.Controllers
 {
@@ -23,7 +20,7 @@ namespace Library_MS.Controllers
         }
 
         // GET: Returns/Details/5
-        [HttpPost]
+        [HttpGet]
         public ActionResult Details(string memberCode)
         {
             if (memberCode == null)
@@ -47,10 +44,45 @@ namespace Library_MS.Controllers
             Issue isu = issueService.getIssueBook(bookId);
             isu.returnDate = returnDate;
             isu.ReturnStaus = true;
+
+            string dueDate = isu.dueDate;
+            decimal fineAmount = FineCalculate(returnDate, dueDate);
+            isu.Fines.Add(new Fine
+            {
+                FineDate = returnDate,
+                FineAmount = fineAmount
+            });
+
             issueService.updateIssue(isu);
-            return RedirectToAction("Details", "Returns", new { id = memberCode });
+
+            return RedirectToAction("Details", "Returns", new { memberCode = memberCode } );
         }
 
        
+        public decimal FineCalculate(string returnDate, string dueDate)
+        {
+            DateToDay dd = new DateToDay();
+
+            double returndate = dd.getDay(returnDate);
+            double duedate = dd.getDay(dueDate);
+            if (returndate > duedate)
+            {
+                double fineDate = returndate - duedate;
+                decimal fineAmount = Convert.ToDecimal(fineDate * 0.5);
+                return fineAmount;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        [HttpPost]
+        public IActionResult FinePayment(int MemberID, string date, decimal amount)
+        {
+
+            issueService.FinePayment(MemberID, date, amount);
+            return Ok();
+        }
     }
 }

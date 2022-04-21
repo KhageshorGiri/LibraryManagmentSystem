@@ -1,0 +1,71 @@
+﻿
+@model Library_MS.DTOs.RegisterLogin;
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+
+}
+
+<div class="container">
+    <div class="card shadow-lg">
+        <div class="card-header text-center">
+            <h4>Register New User</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Register">
+               @* <div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label>Full Name</label>
+                        <input class="form-control" name="FullName" id="fullName" type="text" required/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Gender</label>
+                        <input class="form-control" name="Gender" id="gender" type="text" list="genderList" required/>
+                        <datalist id="genderList">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </datalist>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Phone</label>
+                        <input class="form-control" name="Phone" id="phone" required/>
+
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Email</label>
+                        <input class="form-control" name="Email" id="email" type="email" required/>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <label>Image</label>
+                        <input class="form-control" name="Image" id="image" type="file" required/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>User Name</label>
+                        <input class="form-control" name="UserName" id="Username" type="text" required/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Role</label>
+                        <input class="form-control" list="roleList" name="Role" id="role" type="text" required/>
+                        <datalist id="roleList">
+                            <option>Admin</option>
+                        </datalist>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Password</label>
+                        <input class="form-control" name="Password" id="password" type="text" required/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Conform Password</label>
+                        <input class="form-control" name="ConformPassword" id="conformPassword" type="text" required/>
+                    </div>
+                </div>
+                <hr class="bg-warning" />
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary px-3">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
