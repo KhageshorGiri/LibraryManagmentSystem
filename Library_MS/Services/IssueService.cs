@@ -29,17 +29,17 @@ namespace Library_MS.Services
 
         public void createIssuce(IssueVM issue)
         {
-            var bookID = db.Books.Where(x => x.ISBN == issue.bookISBN);
+            Book bookID = db.Books.Where(x => x.ISBN == issue.bookISBN).FirstOrDefault();
             var memberID = db.Members.Where(x => x.MemberCode == issue.memberCode).FirstOrDefault().MemberID;
             Issue isu = new Issue();
             isu.MemberID = memberID;
-            isu.BookID = bookID.FirstOrDefault().BookID;
+            isu.BookID = bookID.BookID;
             isu.issueDate = issue.issueDate;
             isu.dueDate = issue.dueDate;
             isu.ReturnStaus = false;
             db.Issues.Add(isu);
 
-            bookID.FirstOrDefault().Status = "Issued";
+            bookID.Status = "Issued";
             db.Entry(bookID).State = EntityState.Modified;
 
             db.SaveChanges();          
