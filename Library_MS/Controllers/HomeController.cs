@@ -4,28 +4,28 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Diagnostics;
 using System.IO;
-using Library_MS.Repository;
+using Library_MS.Interfaces;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace Library_MS.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IWebHostEnvironment webEev;
         private readonly IAuth authServie;
         private readonly IExtra extraService;
-        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment env, IAuth service, IExtra extra)
+        private readonly IActivityLogger loggerService;
+        public HomeController(IActivityLogger logger, IWebHostEnvironment env, IAuth service, IExtra extra)
         {
-            this._logger = logger;
+            this.loggerService = logger;
             this.webEev = env;
             this.authServie = service;
             this.extraService = extra;
@@ -33,10 +33,12 @@ namespace Library_MS.Controllers
 
         public IActionResult Index()
         {
+            
             ViewBag.TotalBook = extraService.totalBook();
             ViewBag.TotalMember = extraService.totalmember();
             ViewBag.IssuedBook = extraService.issuedBook();
             ViewBag.DueBook = extraService.dueBook();
+            //throw new Exception("Error");
             return View();
         }
 
@@ -133,7 +135,9 @@ namespace Library_MS.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            loggerService.ExceptionLogger(exceptionDetails.Path, exceptionDetails.Error.Message, exceptionDetails.Error.StackTrace);
+            return View("Error");
         }
     }
 }

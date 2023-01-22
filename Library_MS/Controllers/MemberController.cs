@@ -1,13 +1,10 @@
 ﻿using Library_MS.Models;
 using Library_MS.Model_DBContext;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
-using Library_MS.Repository;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using Library_MS.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Library_MS.Controllers

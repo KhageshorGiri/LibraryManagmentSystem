@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = Library_MS
-build_property.ProjectDir = E:\Binod\ASP.NET\Library_MS\Library_MS\
+build_property.ProjectDir = E:\Binod\ASP.NET\Library\Library_MS\Library_MS\

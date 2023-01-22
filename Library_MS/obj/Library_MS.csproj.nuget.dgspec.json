@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Binod\\ASP.NET\\Library_MS\\Library_MS\\Library_MS.csproj": {}
+    "E:\\Binod\\ASP.NET\\Library\\Library_MS\\Library_MS\\Library_MS.csproj": {}
   },
   "projects": {
-    "E:\\Binod\\ASP.NET\\Library_MS\\Library_MS\\Library_MS.csproj": {
+    "E:\\Binod\\ASP.NET\\Library\\Library_MS\\Library_MS\\Library_MS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Binod\\ASP.NET\\Library_MS\\Library_MS\\Library_MS.csproj",
+        "projectUniqueName": "E:\\Binod\\ASP.NET\\Library\\Library_MS\\Library_MS\\Library_MS.csproj",
         "projectName": "Library_MS",
-        "projectPath": "E:\\Binod\\ASP.NET\\Library_MS\\Library_MS\\Library_MS.csproj",
+        "projectPath": "E:\\Binod\\ASP.NET\\Library\\Library_MS\\Library_MS\\Library_MS.csproj",
         "packagesPath": "C:\\Users\\asndp\\.nuget\\packages\\",
-        "outputPath": "E:\\Binod\\ASP.NET\\Library_MS\\Library_MS\\obj\\",
+        "outputPath": "E:\\Binod\\ASP.NET\\Library\\Library_MS\\Library_MS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -84,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
         }
       }
     }

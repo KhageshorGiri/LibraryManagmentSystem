@@ -1,11 +1,8 @@
 ﻿using Library_MS.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Library_MS.Repository
+namespace Library_MS.Interfaces
 {
     public interface IBook
     {

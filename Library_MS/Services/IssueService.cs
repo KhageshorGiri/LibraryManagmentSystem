@@ -3,7 +3,7 @@ using Library_MS.DTOs;
 using Library_MS.Model_DBContext;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Library_MS.Repository;
+using Library_MS.Interfaces;
 
 namespace Library_MS.Services
 {

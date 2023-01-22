@@ -26,6 +26,7 @@ namespace Library_MS.Model_DBContext
         public DbSet<Fine> Fines { get; set; }
         public DbSet<FineDetails> FineDetails { get; set; }
         public DbSet<Reserve> Reserves { get; set; }
+        public DbSet<ExceptionLog> ExceptionLogs { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
