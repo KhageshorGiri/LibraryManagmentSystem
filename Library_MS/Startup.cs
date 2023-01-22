@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
+using Serilog;
 
 namespace Library_MS
 {
@@ -44,6 +45,7 @@ namespace Library_MS
             services.AddScoped<IIssue, IssueService>();
             services.AddScoped<IAuth, AuthService>();
             services.AddScoped<IExtra, ExtraService>();
+            services.AddScoped<IActivityLogger, ActivityLoggerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +63,8 @@ namespace Library_MS
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 

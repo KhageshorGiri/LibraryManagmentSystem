@@ -19,12 +19,13 @@ namespace Library_MS.Services
             throw new NotImplementedException();
         }
 
-        public void ExceptionLogger(string path, string message, string stackTrace)
+        public void ExceptionLogger(string path, string message, string stackTrace, string user)
         {
             ExceptionLog exception = new ExceptionLog();
             exception.Path = path;
             exception.ExceptionMessage = message;
             exception.StackTrace = stackTrace;
+            exception.CreatedBy = Convert.ToInt32(user);
             db.ExceptionLogs.Add(exception);
             db.SaveChanges();
         }

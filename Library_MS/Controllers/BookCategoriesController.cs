@@ -5,16 +5,21 @@ using Microsoft.EntityFrameworkCore;
 using Library_MS.Model_DBContext;
 using Library_MS.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
+using System.Security.Claims;
+using System;
 
 namespace Library_MS.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class BookCategoriesController : Controller
     {
+        private readonly ILogger<BookCategoriesController> _logger;
         private readonly LibraryContext _context;
-
-        public BookCategoriesController(LibraryContext context)
+        
+        public BookCategoriesController(ILogger<BookCategoriesController> logger, LibraryContext context)
         {
+            _logger = logger;
             _context = context;
         }
 
@@ -22,6 +27,7 @@ namespace Library_MS.Controllers
         
         public async Task<IActionResult> Index()
         {
+            _logger.LogInformation($"Accessing Book Category Index");
             return View(await _context.bookCategories.ToListAsync());
         }
 

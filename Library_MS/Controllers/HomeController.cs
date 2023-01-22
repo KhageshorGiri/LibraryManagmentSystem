@@ -19,26 +19,26 @@ namespace Library_MS.Controllers
     [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
+        private readonly ILogger<HomeController> _logger;
         private readonly IWebHostEnvironment webEev;
         private readonly IAuth authServie;
         private readonly IExtra extraService;
         private readonly IActivityLogger loggerService;
-        public HomeController(IActivityLogger logger, IWebHostEnvironment env, IAuth service, IExtra extra)
+        public HomeController(ILogger<HomeController> logger, IActivityLogger activityLogger, IWebHostEnvironment env, IAuth service, IExtra extra)
         {
-            this.loggerService = logger;
+            this._logger = logger;
+            this.loggerService = activityLogger;
             this.webEev = env;
             this.authServie = service;
             this.extraService = extra;
         }
 
         public IActionResult Index()
-        {
-            
+        {            
             ViewBag.TotalBook = extraService.totalBook();
             ViewBag.TotalMember = extraService.totalmember();
             ViewBag.IssuedBook = extraService.issuedBook();
             ViewBag.DueBook = extraService.dueBook();
-            //throw new Exception("Error");
             return View();
         }
 
@@ -105,7 +105,7 @@ namespace Library_MS.Controllers
                 if (user.Password.Replace(" ","") == member.Password.Replace(" ", ""))
                 {
                     var claims = new List<Claim>();
-                    claims.Add(new Claim(ClaimTypes.NameIdentifier, member.UserName));
+                    claims.Add(new Claim(ClaimTypes.NameIdentifier, Convert.ToString(member.UserID)));
                     claims.Add(new Claim(ClaimTypes.Name, member.UserName));
                     claims.Add(new Claim(ClaimTypes.Role, member.Role));
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -136,7 +136,9 @@ namespace Library_MS.Controllers
         public IActionResult Error()
         {
             var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            loggerService.ExceptionLogger(exceptionDetails.Path, exceptionDetails.Error.Message, exceptionDetails.Error.StackTrace);
+            var user = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            loggerService.ExceptionLogger(exceptionDetails.Path, exceptionDetails.Error.Message, 
+                exceptionDetails.Error.StackTrace, user);
             return View("Error");
         }
     }

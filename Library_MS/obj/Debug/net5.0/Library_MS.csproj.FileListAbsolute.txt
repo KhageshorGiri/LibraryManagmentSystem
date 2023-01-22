@@ -186,7 +186,6 @@ E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Microsoft.CodeAn
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Microsoft.CodeAnalysis.Razor.dll
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Microsoft.CodeAnalysis.Workspaces.dll
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
-E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
@@ -335,3 +334,15 @@ E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\ref\Library_MS.d
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\Library_MS.pdb
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\Library_MS.genruntimeconfig.cache
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\Razor\Views\Home\Error.cshtml.g.cs
+E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Serilog.dll
+E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Serilog.AspNetCore.dll
+E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Serilog.Enrichers.Environment.dll
+E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Serilog.Enrichers.Process.dll
+E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Serilog.Enrichers.Thread.dll
+E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Serilog.Extensions.Hosting.dll
+E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Serilog.Extensions.Logging.dll
+E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Serilog.Formatting.Compact.dll
+E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Serilog.Settings.Configuration.dll
+E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Serilog.Sinks.Console.dll
+E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Serilog.Sinks.Debug.dll
+E:\Binod\ASP.NET\Library\Library_MS\Library_MS\bin\Debug\net5.0\Serilog.Sinks.File.dll

@@ -13,5 +13,6 @@ namespace Library_MS.Models
         public string ExceptionMessage { get; set; }
         public string Path { get; set; }
         public string StackTrace { get; set; }
+        public int? CreatedBy { get; set; }
     }
 }
