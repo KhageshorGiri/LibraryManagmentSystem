@@ -298,8 +298,6 @@ E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\scopedcss\bundle
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\Library_MS.TagHelpers.input.cache
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\Library_MS.TagHelpers.output.cache
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\Library_MS.RazorCoreGenerate.cache
-E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\Razor\Views\BookCategories\Create.cshtml.g.cs
-E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\Razor\Views\BookCategories\Details.cshtml.g.cs
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\Razor\Views\BookCategories\Edit.cshtml.g.cs
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\Razor\Views\BookCategories\Index.cshtml.g.cs
 E:\Binod\ASP.NET\Library\Library_MS\Library_MS\obj\Debug\net5.0\Razor\Views\Books\Create.cshtml.g.cs

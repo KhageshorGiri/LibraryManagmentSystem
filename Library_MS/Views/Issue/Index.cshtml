@@ -24,28 +24,28 @@
 *@
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label>Book ISBN</label>
+                            <label>Book ISBN <span class="text-danger">*</span></label>
                             <input class="form-control" name="bookISBN" id="isbn" />
                             <label id="bookErrorMgs" class="text-danger" style="display:none;">Please Provide Valid Book ISBN.</label>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Member Code</label>
+                            <label>Member Code <span class="text-danger">*</span></label>
                             <input class="form-control" name="memberCode" id="memberCode" />
                             <label id="memberErrorMgs" class="text-danger" style="display:none;">Please Provide Valid Member Code.</label>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Issue Date</label>
-                            <input class="form-control" name="issueDate" type="date" />
+                            <label>Issue Date <span class="text-danger">*</span></label>
+                            <input class="form-control" id="issueDate" name="issueDate" type="date" />
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Due Date</label>
-                            <input class="form-control" name="dueDate" type="date" />
+                            <label>Due Date <span class="text-danger">*</span></label>
+                            <input class="form-control" id="dueDate" name="dueDate" type="date" />
                         </div>
                     </div>
                     <hr class="bg-warning"/>
                     <div class="form-group text-center">
                         <button type="reset" class="btn btn-secondary mr-2 px-3" id="allClear">Clear</button>
-                        <button type="submit" class="btn btn-info px-3">Issue</button>
+                        <button type="submit" id="issueBooktBtn" class="btn btn-info px-3">Issue</button>
                     </div>
                 </form>
                
@@ -199,8 +199,73 @@
             }
         });
 
-        $("#allClear").click(function () {
+        $("#issueBooktBtn").click(function () {
+            $("#issueBooktBtn").prop("type", "button");
+            var member = $("#memberCode").val();
+            var isbn = $("#isbn").val();
+            var issueDate = $("#issueDate").val();
+            var dueDate = $("#dueDate").val();
+            console.log(member, isbn, issueDate, dueDate);
+            if (member == "" || isbn == "" || issueDate == "" || dueDate == "") {
+                $("#issueBooktBtn").prop("type", "button");
+                if (member == "" || member == "undefined") {
+                    $("#memberCode").css({ "border-color": "red" });
+                }
+                if (isbn == "" || isbn == "undefined") {
+                    $("#isbn").css({ "border-color": "red" });
+                }
+                if (issueDate == "" || issueDate == "undefined") {
+                    $("#issueDate").css({ "border-color": "red" });
+                }
+                if (dueDate == "" || dueDate == "undefined") {
+                    $("#dueDate").css({ "border-color": "red" });
+                }
+            }
+            else {
+                $("#issueBooktBtn").prop("type", "submit");
+            }
+        });
 
+        // removing all validation errors if evereythings goes well.
+        $("#isbn").keyup(function () {
+            if ($("#isbn").val() == "") {
+                $("#isbn").css({ "border-color": "red" });
+            }
+            else {
+                $("#isbn").css({ "border-color": "#BF40BF" });
+            }
+        });
+
+        $("#memberCode").keyup(function () {
+            if ($("#memberCode").val() == "") {
+                $("#memberCode").css({ "border-color": "red" });
+            }
+            else {
+                $("#memberCode").css({ "border-color": "#BF40BF" });
+            }
+        });
+
+        $("#issueDate").keyup(function () {
+            if ($("#issueDate").val() == "") {
+                $("#issueDate").css({ "border-color": "red" });
+            }
+            else {
+                $("#issueDate").css({ "border-color": "#BF40BF" });
+            }
+        });
+
+        $("#dueDate").keyup(function () {
+            if ($("#dueDate").val() == "") {
+                $("#dueDate").css({ "border-color": "red" });
+            }
+            else {
+                $("#dueDate").css({ "border-color": "#BF40BF" });
+            }
+        });
+
+        // clearing all input field
+        $("#allClear").click(function () {
+            $("input").css({ "border-color": "#ced4da" });
             $("#memberImg").prop('src', '');
             $("#memberName").html('');
             $("#Mdate").html('');

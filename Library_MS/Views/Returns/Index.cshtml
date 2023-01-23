@@ -8,14 +8,48 @@
     <form method="get" asp-controller="Returns" asp-action="Details">
         <div class="row">
             <div class="col-md-12 form-group row form-inline">
-                <label class="col-md-2">Member Code</label>
+                <label class="col-md-2">Member Code <span class="text-danger">*</span></label>
                 <div class="col-md-8 form-inline">
-                    <input class="form-control col-md-10" name="memberCode" id="memberCode" />
-                    <button class="btn btn-primary px-4">Go</button>
+                    <input class="form-control col-md-8" name="memberCode" id="memberCode" />
+                    <button id="searchMemeber" class="btn btn-primary px-4">Search</button>
                 </div>
-
             </div>
-
         </div>
     </form>
 </div>
+
+
+
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#searchMemeber").click(function () {
+                $("#searchMemeber").prop("type","button");
+                var category = $("#memberCode").val();
+                if (category == "") {
+                    $("#saveBookCategory").prop("type", "button");
+                    $("#memberCode").css({ "border-color": "red" });
+                }
+                else {
+                    $("#searchMemeber").prop("type","submit");
+                }
+            });
+
+            $("#memberCode").keyup(function () {
+                if ($("#memberCode").val() == "") {
+                    $("#memberCode").css({ "border-color": "red" });
+                }
+                else {
+                    $("#memberCode").css({ "border-color": "#BF40BF" });
+                }
+            });
+
+        });
+
+    </script>
+
+}

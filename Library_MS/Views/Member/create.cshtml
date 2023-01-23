@@ -16,28 +16,33 @@
                     <h5>Gneral Info</h5>
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Full Name</label>
+                    <label>Full Name <span class="text-danger">*</span></label>
                     <input class="form-control col-md-12" id="fullname" name="FullName" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Image</label>
-                    <input class="form-control col-md-12" name="ImageFile" type="file"/>
+                    <label>Image <span class="text-danger">*</span></label>
+                    <input class="form-control col-md-12" id="ImageFile" name="ImageFile" type="file"/>
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Gender</label>
-                    <input class="form-control col-md-12" name="Gender" />
+                    <label>Gender <span class="text-danger">*</span></label>
+                    <input id="Gender" class="form-control" list="genderStatusList" type="text" name="Gender" />
+                    <datalist id="genderStatusList">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Others</option>
+                    </datalist>
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Email</label>
-                    <input class="form-control col-md-12" name="Email" />
+                    <label>Email <span class="text-danger">*</span></label>
+                    <input class="form-control col-md-12" id="Email" name="Email" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Phone</label>
-                    <input class="form-control col-md-12" name="Phone" />
+                    <label>Phone <span class="text-danger">*</span></label>
+                    <input class="form-control col-md-12" id="Phone" name="Phone" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Membership Date</label>
-                    <input class="form-control col-md-12" name="MembershipDate" />
+                    <label>Membership Date <span class="text-danger">*</span></label>
+                    <input class="form-control col-md-12" id="MembershipDate" name="MembershipDate" type="date"/>
                 </div>
 
             </div>
@@ -46,20 +51,20 @@
                     <h5>Address</h5>
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Country</label>
-                    <input class="form-control col-md-12" name="Country" />
+                    <label>Country <span class="text-danger">*</span></label>
+                    <input class="form-control col-md-12" id="Country" name="Country" value="Nepal"/>
                 </div>
                 <div class="form-group col-md-6">
-                    <label>City</label>
-                    <input class="form-control col-md-12" name="City" />
+                    <label>City <span class="text-danger">*</span></label>
+                    <input class="form-control col-md-12" id="City" name="City" />
                 </div>
                 <div class="form-group col-md-12">
-                    <label>Local Address</label>
-                    <input class="form-control col-md-12" name="AdditionalInfo" />
+                    <label>Local Address <span class="text-danger">*</span></label>
+                    <input class="form-control col-md-12" id="AdditionalInfo" name="AdditionalInfo" />
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="reset" class="btn btn-secondary">Clear</button>
+                <button type="reset" id="clearInputForm" class="btn btn-secondary">Clear</button>
                 <button type="submit" id="SaveMember" class="btn btn-primary">Save</button>
             </div>
         </div>
@@ -76,22 +81,144 @@
 
     $(document).ready(function () {
 
-        $("#fullname").keyup(function () {
-            if ($("#fullname").val() == '') {
-                $("#fullname").addClass('class-empty');
-            } else {
-                $("#fullname").removeClass('class-empty');
+      
+        $("#SaveMember").click(function () {
+            $("#SaveMember").prop("type", "button");
+            var fullName = $("#fullname").val();
+            var image = $("#ImageFile").val();
+            var gender = $("#Gender").val();
+            var email = $("#Email").val();
+            var phone = $("#Phone").val();
+            var membershipDate = $("#MembershipDate").val();
+            var country = $("#Country").val();
+            var city = $("#City").val();
+            var localAddress = $("#AdditionalInfo").val();
+            console.log(fullName);
+            if (fullName == "" || image == "" || gender == "" || email == "" || phone == "" || membershipDate == "" ||
+                country == "" || city == "" || localAddress == "")
+            {
+                $("#SaveMember").prop("type", "button");
+
+                if (fullName = " " || fullName == "undefined") {
+                    $("#fullname").css({ "border-color": "red" });
+                }
+                if (image = " " || image == "undefined") {
+                    $("#ImageFile").css({ "border-color": "red" });
+                }
+                if (gender = " " || gender == "undefined") {
+                    $("#Gender").css({ "border-color": "red" });
+                }
+                if (email = " " || email == "undefined") {
+                    $("#Email").css({ "border-color": "red" });
+                }
+                if (phone = " " || phone == "undefined") {
+                    $("#Phone").css({ "border-color": "red" });
+                }
+                if (membershipDate = " " || membershipDate == "undefined") {
+                    $("#MembershipDate").css({ "border-color": "red" });
+                }
+                if (country = " " || country == "undefined") {
+                    $("#Country").css({ "border-color": "red" });
+                }
+                if (city = " " || city == "undefined") {
+                    $("#City").css({ "border-color": "red" });
+                }
+                if (localAddress = " " || localAddress == "undefined") {
+                    $("#AdditionalInfo").css({ "border-color": "red" });
+                }
+               
+            }
+            else {
+                $("#SaveMember").prop("type", "submit");
             }
         });
-@*
-        $("#SaveMember").click(function () {
-            console.log('hi');
-            $("#fullname").addClass('class-empty');
-            $("#SaveMember").prop('type', 'button');
-            alert();
-        });*@
 
+        // removind all validation rules and errors
+        $("#fullname").keyup(function () {
+            if ($("#fullname").val() == "") {
+                $("#fullname").css({ "border-color": "red" });
+            }
+            else {
+                $("#fullname").css({ "border-color": "#BF40BF" });
+            }
+        });
 
+        $("#ImageFile").change(function () {
+            if ($("#ImageFile").val() == "") {
+                $("#ImageFile").css({ "border-color": "red" });
+            }
+            else {
+                $("#ImageFile").css({ "border-color": "#BF40BF" });
+            }
+        });
+
+        $("#Gender").keyup(function () {
+            if ($("#Gender").val() == "") {
+                $("#Gender").css({ "border-color": "red" });
+            }
+            else {
+                $("#Gender").css({ "border-color": "#BF40BF" });
+            }
+        });
+
+        $("#Email").keyup(function () {
+            if ($("#Email").val() == "") {
+                $("#Email").css({ "border-color": "red" });
+            }
+            else {
+                $("#Email").css({ "border-color": "#BF40BF" });
+            }
+        });
+
+        $("#MembershipDate").change(function () {
+            if ($("#MembershipDate").val() == "") {
+                $("#MembershipDate").css({ "border-color": "red" });
+            }
+            else {
+                $("#MembershipDate").css({ "border-color": "#BF40BF" });
+            }
+        });
+
+        $("#Country").keyup(function () {
+            if ($("#Country").val() == "") {
+                $("#Country").css({ "border-color": "red" });
+            }
+            else {
+                $("#Country").css({ "border-color": "#BF40BF" });
+            }
+        });
+
+        $("#City").keyup(function () {
+            if ($("#City").val() == "") {
+                $("#City").css({ "border-color": "red" });
+            }
+            else {
+                $("#City").css({ "border-color": "#BF40BF" });
+            }
+        });
+
+        $("#AdditionalInfo").keyup(function () {
+            if ($("#AdditionalInfo").val() == "") {
+                $("#AdditionalInfo").css({ "border-color": "red" });
+            }
+            else {
+                $("#AdditionalInfo").css({ "border-color": "#BF40BF" });
+            }
+        });
+
+        $("#Phone").keyup(function () {
+            if ($("#Phone").val() == "") {
+                $("#Phone").css({ "border-color": "red" });
+            }
+            else {
+                $("#Phone").css({ "border-color": "#BF40BF" });
+            }
+        });
+
+        // clearing red border for input filed
+        $("#clearInputForm").click(function () {
+            $("input").css({ "border-color": "#ced4da" });
+        });
     });
 
 </script>

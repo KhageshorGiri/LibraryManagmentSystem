@@ -8,36 +8,36 @@
         <div class="col-md-8 card p-2">
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label>Book Name</label>
-                    <input class="form-control" type="text" name="BookTitle" />
+                    <label>Book Name <span class="text-danger">*</span></label>
+                    <input id="BookTitle" class="form-control" type="text" name="BookTitle" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>ISBN</label>
-                    <input class="form-control" name="ISBN" />
+                    <label>ISBN <span class="text-danger">*</span></label>
+                    <input id="ISBN" class="form-control" name="ISBN" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Image</label>
-                    <input class="form-control" type="file" name="ImageFile" />
+                    <label>Image <span class="text-danger">*</span></label>
+                    <input id="ImageFile" class="form-control" type="file" name="ImageFile" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Tolta Page No.</label>
-                    <input class="form-control" type="number" name="numberOfPage" />
+                    <label>Tolta Page No. <span class="text-danger">*</span></label>
+                    <input id="numberOfPage" class="form-control" type="number" name="numberOfPage" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Format</label>
-                    <input class="form-control" type="text" name="Format" />
+                    <label>Format <span class="text-danger">*</span></label>
+                    <input id="Format" class="form-control" type="text" name="Format" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Price</label>
-                    <input class="form-control" type="text" name="price" />
+                    <label>Price <span class="text-danger">*</span></label>
+                    <input id="price" class="form-control" type="text" name="price" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Language</label>
-                    <input class="form-control" type="text" name="Language" />
+                    <label>Language <span class="text-danger">*</span></label>
+                    <input id="Language" class="form-control" type="text" name="Language" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Status</label>
-                    <input class="form-control" list="bookStatusList" type="text" name="Status" />
+                    <label>Status <span class="text-danger">*</span></label>
+                    <input id="Status" class="form-control" list="bookStatusList" type="text" name="Status" />
                     <datalist id="bookStatusList">
                         <option>Active</option>
                         <option>Issued</option>
@@ -46,12 +46,12 @@
                     </datalist>
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Purchase Date</label>
-                    <input class="form-control" type="date" name="PurchaseDate" />
+                    <label>Purchase Date <span class="text-danger">*</span></label>
+                    <input id="PurchaseDate" class="form-control" type="date" name="PurchaseDate" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Publish Date</label>
-                    <input class="form-control" type="date" name="PublishDate" />
+                    <label>Publish Date <span class="text-danger">*</span></label>
+                    <input id="PublishDate" class="form-control" type="date" name="PublishDate" />
                 </div>
 
             </div>
@@ -60,7 +60,7 @@
             <div class="card p-2">
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <label>Category</label>
+                        <label>Category </label>
                         @Html.DropDownList("CategoryID", null, "----Select Category----", new { @class = "form-control" })
                     </div>
                     <div class="form-group col-md-12">
@@ -93,8 +93,8 @@
         <div class="card-footer">
             <div class="float-right">
                 <div class="row">
-                    <button type="reset" class="btn btn-secondary mr-2">Clear</button>
-                    <button type="submit" class="btn btn-info">Save</button>
+                    <button type="reset" id="clearInputForm" class="btn btn-secondary mr-2">Clear</button>
+                    <button type="submit" id="saveBookDetails" class="btn btn-info">Save</button>
                 </div>
             </div>
         </div>
@@ -106,6 +106,66 @@
 <script>
 
     $(document).ready(function () {
+
+        $("#saveBookDetails").click(function () {
+            $("#saveBookDetails").prop("type", "button");
+            var bookTitle = $("#BookTitle").val();
+            var isbn = $("#ISBN").val();
+            var imageFile = $("#ImageFile").val();
+            var pages = $("#numberOfPage").val();
+            var format = $("#Format").val();
+            var language = $("#Language").val();
+            var price = $("#price").val();
+            var status = $("#Status").val();
+            var purchaseDate = $("#PurchaseDate").val();
+            var publishDate = $("#PublishDate").val();
+            var category = $("#CategoryID").val();
+
+            if (bookTitle == " " || isbn == " " || imageFile == " " || pages == ""  || format == " " || format == " " || language == " " ||
+                price == " " || status == " " || purchaseDate == " " || publishDate == " " || category == " ")
+            {
+                $("#saveBookDetails").prop("type", "button");
+                console.log("hello");
+                console.log(bookTitle, isbn)
+                if (bookTitle = " " || bookTitle == "undefined") {
+                    $("#BookTitle").css({ "border-color": "red" });
+                }
+                if (isbn = " " || isbn == "undefined") {
+                    $("#ISBN").css({ "border-color": "red" });
+                }
+                if (imageFile = " " || imageFile == "undefined") {
+                    $("#ImageFile").css({ "border-color": "red" });
+                }
+                if (pages = " " || pages == "undefined") {
+                    $("#numberOfPage").css({ "border-color": "red" });
+                }
+                if (format = " " || format == "undefined") {
+                    $("#Format").css({ "border-color": "red" });
+                }
+                if (price = " " || price == "undefined") {
+                    $("#price").css({ "border-color": "red" });
+                }
+                if (language = " " || language == "undefined") {
+                    $("#Language").css({ "border-color": "red" });
+                }
+                if (status = " " || status == "undefined") {
+                    $("#Status").css({ "border-color": "red" });
+                }
+                if (purchaseDate = " " || purchaseDate == "undefined") {
+                    $("#PurchaseDate").css({ "border-color": "red" });
+                }
+                if (publishDate = " " || publishDate == "undefined") {
+                    $("#PublishDate").css({ "border-color": "red" });
+                }
+                if (category = " " || category == "----Select Category----") {
+                    $("#CategoryID").css({ "border-color": "red" });
+                }
+            }
+            else {
+                $("#saveBookDetails").prop("type", "submit");
+            }
+
+        });
 
         $("#addAtuthor").click(function () {           
             var authorName = $("#author").val();
@@ -135,8 +195,111 @@
 
     });
 
+    // removing validation error if every things goes well.
+    $("#BookTitle").keyup(function () {
+        if ($("#BookTitle").val() == "") {
+            $("#BookTitle").css({ "border-color": "red" });
+        }
+        else {
+            $("#BookTitle").css({ "border-color": "#BF40BF" });
+        }
+    });
 
+    $("#ISBN").keyup(function () {
+        if ($("#ISBN").val() == "") {
+            $("#ISBN").css({ "border-color": "red" });
+        }
+        else {
+            $("#ISBN").css({ "border-color": "#BF40BF" });
+        }
+    });
 
+    $("#ImageFile").click(function () {
+        if ($("#ImageFile").val() == "") {
+            $("#ImageFile").css({ "border-color": "red" });
+        }
+        else {
+            $("#ImageFile").css({ "border-color": "#BF40BF" });
+        }
+    });
+
+    $("#numberOfPage").keyup(function () {
+        if ($("#numberOfPage").val() == "") {
+            $("#numberOfPage").css({ "border-color": "red" });
+        }
+        else {
+            $("#numberOfPage").css({ "border-color": "#BF40BF" });
+        }
+    });
+
+    $("#Format").keyup(function () {
+        if ($("#Format").val() == "") {
+            $("#Format").css({ "border-color": "red" });
+        }
+        else {
+            $("#Format").css({ "border-color": "#BF40BF" });
+        }
+    });
+
+    $("#price").keyup(function () {
+        if ($("#price").val() == "") {
+            $("#price").css({ "border-color": "red" });
+        }
+        else {
+            $("#price").css({ "border-color": "#BF40BF" });
+        }
+    });
+
+    $("#Language").keyup(function () {
+        if ($("#Language").val() == "") {
+            $("#Language").css({ "border-color": "red" });
+        }
+        else {
+            $("#Language").css({ "border-color": "#BF40BF" });
+        }
+    });
+
+    $("#Status").keyup(function () {
+        if ($("#Status").val() == "") {
+            $("#Status").css({ "border-color": "red" });
+        }
+        else {
+            $("#Status").css({ "border-color": "#BF40BF" });
+        }
+    });
+
+    $("#PurchaseDate").keyup(function () {
+        if ($("#PurchaseDate").val() == "") {
+            $("#PurchaseDate").css({ "border-color": "red" });
+        }
+        else {
+            $("#PurchaseDate").css({ "border-color": "#BF40BF" });
+        }
+    });
+
+    $("#PublishDate").keyup(function () {
+        if ($("#PublishDate").val() == "") {
+            $("#PublishDate").css({ "border-color": "red" });
+        }
+        else {
+            $("#PublishDate").css({ "border-color": "#BF40BF" });
+        }
+    });
+
+    $("#CategoryID").change(function () {
+        if ($("#CategoryID").val() == "") {
+            $("#CategoryID").css({ "border-color": "red" });
+        }
+        else {
+            $("#CategoryID").css({ "border-color": "#BF40BF" });
+        }
+    });
+
+    // clearing input red border
+    $("#clearInputForm").click(function () {
+        $("input").css({ "border-color": "#ced4da" });
+        $("#CategoryID").css({ "border-color": "#ced4da" });
+    });
 
 </script>
 

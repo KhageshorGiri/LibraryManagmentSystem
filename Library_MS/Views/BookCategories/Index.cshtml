@@ -57,14 +57,14 @@
                         <div class="row">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group col-md-12">
-                                <label>Catagory</label>
-                                <input class="form-control" name="Category" />
+                                <label>Catagory <span class="text-danger">*</span> </label>
+                                <input id="bookCategory" class="form-control" name="Category" />
 
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="reset" class="btn btn-secondary">Clear</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" id="saveBookCategory" class="btn btn-primary">Save</button>
                         </div>
                     </form>
 
@@ -91,7 +91,26 @@
 
 
 
+            $("#saveBookCategory").click(function () {
+                $("#saveBookCategory").prop("type","button");
+                var category = $("#bookCategory").val();
+                if (category == "") {
+                    $("#saveBookCategory").prop("type", "button");
+                    $("#bookCategory").css({ "border-color": "red" });
+                }
+                else {
+                    $("#saveBookCategory").prop("type","submit");
+                }
+            });
 
+            $("#bookCategory").keyup(function () {
+                if ($("#bookCategory").val() == "") {
+                    $("#bookCategory").css({ "border-color": "red" });
+                }
+                else {
+                    $("#bookCategory").css({ "border-color": "#BF40BF" });
+                }
+            });
 
         });
 

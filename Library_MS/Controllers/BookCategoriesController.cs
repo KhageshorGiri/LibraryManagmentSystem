@@ -31,30 +31,7 @@ namespace Library_MS.Controllers
             return View(await _context.bookCategories.ToListAsync());
         }
 
-        // GET: BookCategories/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var bookCategory = await _context.bookCategories
-                .FirstOrDefaultAsync(m => m.CategoryID == id);
-            if (bookCategory == null)
-            {
-                return NotFound();
-            }
-
-            return View(bookCategory);
-        }
-
-        // GET: BookCategories/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
+        
         // POST: BookCategories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
