@@ -44,18 +44,15 @@ namespace Library_MS.Controllers
         public ActionResult Create(string memberCode, int bookId,string returnDate)
         {
             Issue isu = issueService.getIssueBook(bookId);
+            var issueId = isu.IssueID;
             isu.returnDate = returnDate;
             isu.ReturnStaus = true;
 
             string dueDate = isu.dueDate;
             decimal fineAmount = FineCalculate(returnDate, dueDate);
-            isu.Fines.Add(new Fine
-            {
-                FineDate = returnDate,
-                FineAmount = fineAmount
-            });
-
+           
             issueService.updateIssue(isu);
+            issueService.AddFineData(issueId, fineAmount, returnDate);
 
             return RedirectToAction("Details", "Returns", new { memberCode = memberCode } );
         }

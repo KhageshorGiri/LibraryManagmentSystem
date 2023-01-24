@@ -11,6 +11,7 @@ namespace Library_MS.Interfaces
         public Member getMember(string code);
         public Book getBook(string isbn);
         public void createIssuce(IssueVM issue);
+        public void AddFineData(int issuedId, decimal? fineAmount, string fineDate);
         public void FinePayment(int member, string date, decimal amount);
     }
 }

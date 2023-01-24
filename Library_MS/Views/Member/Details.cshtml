@@ -14,7 +14,9 @@
                 <table class="table table-sm table-striped">
                     <tr>
                         <th>Name</th>
-                        <td>@Model.FullName</td>
+                        <td>
+                            <lable id="memberFullName">@Model.FullName</lable>
+                        </td>
                     </tr>
                     <tr>
                         <th>Status</th>
@@ -80,7 +82,16 @@
 
                     </div>
                     <div class="col-md-6">
-                        <button class="btn btn-warning px-3" id="payFineModelBtn" data-toggle="modal" data-target="#finePaymentModel">Pay Fine</button>
+                        @*<button class="btn btn-warning px-3" id="payFineModelBtn" data-toggle="modal" data-target="#finePaymentModel">Pay Fine</button>*@
+
+                        @if (FineAmount > 0)
+                        {
+                            <button class="btn btn-warning px-3" id="payFineModelBtn" data-toggle="modal" data-target="#finePaymentModel">Pay Fine</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-warning px-3" id="payFineModelBtn" disabled>Pay Fine</button>
+                        }
                     </div>
                 </div>
             </div>
@@ -108,7 +119,7 @@
                                    <th>Category</th>
                                    <th>Format</th>
                                    <th>Language</th>
-
+                                   <th>Issued</th>
                                </tr>
                            </thead>
                            <tbody>
@@ -136,7 +147,9 @@
                                        <td>
                                            @item.Book.Language
                                        </td>
-                                       
+                                       <td>
+                                           @item.issueDate
+                                       </td>
                                    </tr>
                                }
                            </tbody>
@@ -154,7 +167,8 @@
                                     <th>Category</th>
                                     <th>Format</th>
                                     <th>Language</th>
-
+                                    <th>Issued</th>
+                                    <th>Returned</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -182,7 +196,8 @@
                                         <td>
                                             @item.Book.Language
                                         </td>
-
+                                        <td>@item.issueDate</td>
+                                        <td>@item.returnDate</td>
                                     </tr>
                                 }
                             </tbody>
@@ -235,18 +250,18 @@
 
             <div class="modal-body">
                 <div class="row">
-                    <div class="form-group col-md-12">
-                        <label>MemberID</label>
+                    <div class="form-group col-md-12" style="display:none;">
+                        <label>Member <span class="text-danger">*</span></label>
                         <input class="form-control" value="@Model.MemberID" name="MemberID" id="MemberID" />
                         <label class="text-danger" id="memebrErrMgs" style="display:none;">Plese Select Valid Member.</label>
                     </div>
                     <div class="form-group col-md-12">
-                        <label>Date</label>
+                        <label>Date <span class="text-danger">*</span></label>
                         <input class="form-control" name="date" id="date" type="date" />
                         <label class="text-danger" id="dateErrMgs" style="display:none;">Plese provide Valid amount.</label>
                     </div>
                     <div class="form-group col-md-12">
-                        <label>Amount</label>
+                        <label>Amount <span class="text-danger">*</span></label>
                         <input class="form-control" name="amount" id="amount" type="number" />
                         <label class="text-danger" id="amountErrMgs" style="display:none;">Plese provide Valid amount.</label>
                         <label class="text-danger" id="fineErr" style="display:none;">Paid amount is greater than fine.</label>

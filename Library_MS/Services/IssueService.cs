@@ -4,6 +4,7 @@ using Library_MS.Model_DBContext;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Library_MS.Interfaces;
+using System;
 
 namespace Library_MS.Services
 {
@@ -68,6 +69,16 @@ namespace Library_MS.Services
                 .Include(x=>x.Issues.Where(x=>x.ReturnStaus == false)).ThenInclude(x=>x.Book).ThenInclude(x=>x.BookCategory)
                 .FirstOrDefault();
             return member;
+        }
+
+        public void AddFineData(int issuedId, decimal? fineAmount, string fineDate)
+        {
+            Fine fd = new Fine();
+            fd.IssueID = issuedId;
+            fd.FineDate = fineDate;
+            fd.FineAmount = Convert.ToDecimal(fineAmount);
+            db.Fines.Add(fd);
+            db.SaveChanges();
         }
 
         public void FinePayment(int member, string date, decimal amount)

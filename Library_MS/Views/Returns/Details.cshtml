@@ -17,8 +17,9 @@
                     <tr>
                         <th>Name</th>
                         <td>
-                          
-                            @Model.FullName
+                            <label id="memberFullName">
+                                @Model.FullName
+                            </label>
                         </td>
                     </tr>
                     <tr>
@@ -118,21 +119,23 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12 form-group">
-                            <label>Member Id</label>
-                            <input class="form-control" name="memberCode" id="memberId" />
+                            <label>Member <span class="text-danger">*</span></label>
+                            <input class="form-control" id="memberName" readonly/>
+                            <input class="form-control" name="memberCode" id="memberCode" readonly style="display:none;"/>
                         </div>
                         <div class="col-md-12 form-group">
-                            <label>Book Id</label>
-                            <input class="form-control" name="bookId" id="bookId" />
+                            <label>Book <span class="text-danger">*</span></label>
+                            <input class="form-control" id="bookName" readonly />
+                            <input class="form-control" name="bookId" id="bookId" readonly style="display:none;" />
                         </div>
                         <div class="col-md-12 form-group">
-                            <label>Return Date</label>
+                            <label>Return Date <span class="text-danger">*</span></label>
                             <input type="date" class="form-control" name="returnDate" id="returnDate" />
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" id="returnBookBtn" class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>
@@ -151,11 +154,52 @@
             $("#issuedBookIndex tbody tr .bookReturnBtn").click(function () {
 
                 var bookid = $(this).closest('tr').find('td:eq(0)').html();
+                var bookName = $(this).closest('tr').find('td:eq(2)').html();
                 var member = $('#memberIdValue').html().trim();
+                var memberFullName = $('#memberFullName').html().trim();
+               
                 $("#bookId").val(bookid.trim());
-                $("#memberId").val(member);
+                $("#memberCode").val(member);
+
+                $("#bookName").val(bookName.trim());
+                $("#memberName").val(memberFullName.trim());
             });
 
+
+            $("#returnBookBtn").click(function () {
+                var member = $("#memberId").val();
+                var bookid = $("#bookId").val();
+                var returnDate = $("#returnDate").val();
+                
+                $("#returnBookBtn").prop("type", "button");
+               
+                if (member == "" || bookid == "" || returnDate == ""){
+                    $("#returnBookBtn").prop("type", "button");
+                    if (member == "" || member == "undefined")
+                    {
+                        $("#memberName").css({ "border-color": "red" });
+                    }
+                    if (bookid == "" || bookid == "undefined") {
+                        $("#bookName").css({ "border-color": "red" });
+                    }
+                    if (returnDate == "" || returnDate == "undefined") {
+                        console.log("hi");
+                        $("#returnDate").css({ "border-color": "red" });
+                    }
+                }
+                else {
+                    $("#returnBookBtn").prop("type", "submit");
+                }
+            });
+
+            $("#returnDate").change(function () {
+                if ($("#returnDate").val() == "") {
+                    $("#returnDate").css({ "border-color": "red" });
+                }
+                else {
+                    $("#returnDate").css({ "border-color": "#BF40BF" });
+                }
+            });
 
         });
 
